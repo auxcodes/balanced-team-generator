@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faBars } from '@fortawesome/free-solid-svg-icons';
 import './Header.css';
 
 interface HeaderProps {
@@ -14,7 +14,7 @@ const Header: React.FC<HeaderProps> = ({ isSidebarOpen, onToggleSidebar }) => {
   return (
     <header>
       <button className="menu-icon" onClick={onToggleSidebar}>
-        <FontAwesomeIcon icon={isSidebarOpen ? faArrowLeft : faArrowRight} />
+        <FontAwesomeIcon icon={isSidebarOpen ? faArrowLeft : faBars} />
       </button>
       <h1 className="title">Balanced Team Generator</h1>
     </header>

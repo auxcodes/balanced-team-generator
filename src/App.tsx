@@ -7,9 +7,11 @@ import Sidebar from './components/Sidebar/Sidebar';
 import Home from './components/Home';
 import Players from './components/Pages/Players/Players';
 import './App.css'; // Import your main CSS file
+import { PATH } from './constants/path';
 
 const App: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
+  const playerPath = PATH.BASE_PATH + "/player";
 
   const handleToggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -26,8 +28,8 @@ const App: React.FC = () => {
           <Header isSidebarOpen={isSidebarOpen} onToggleSidebar={handleToggleSidebar} />
           <div className="content">
             <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/players" element={<Players />} />
+              <Route path={PATH.BASE_PATH} element={<Home />} />
+              <Route path={playerPath} element={<Players />} />
             </Routes>
           </div>
         </div>

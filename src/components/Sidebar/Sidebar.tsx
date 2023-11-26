@@ -3,6 +3,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Sidebar.css';
+import { PATH } from '../../constants/path';
 
 interface SidebarProps {
   isOpen: boolean;
@@ -10,15 +11,15 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
 
-  const prefixUrl = 'balanced-team-generator/';
+  const playerPath = PATH.BASE_PATH + "/player";
   return (
     <nav className={isOpen ? 'open' : ''}>
       <ul>
         <li>
-          <Link to="/">Home</Link>
+          <Link to={PATH.BASE_PATH}>Home</Link>
         </li>
         <li>
-          <Link to="/players">Create Teams</Link>
+          <Link to={playerPath}>Create Teams</Link>
         </li>
         {/* Add other sidebar items with Link components */}
       </ul>

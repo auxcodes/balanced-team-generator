@@ -1,5 +1,3 @@
-// Players.tsx
-
 import React, { useState } from 'react';
 import './Players.css';
 
@@ -15,8 +13,9 @@ const Players: React.FC = () => {
   const [spreadsheetUrl, setSpreadsheetUrl] = useState<string>('');
   const [playersData, setPlayerData] = useState<PlayerModel[]>([]);
   const [selectedPlayers, setSelectedPlayers] = useState<PlayerModel[]>([]);
-  const [teamCount, setTeamCount] = useState<number>(0);
+  const [teamCount, setTeamCount] = useState<number>(1);
   const [teams, setTeams] = useState<string[][]>();
+  const [errorMessage, setErrorMessage] = useState<string | undefined>("No Selected Players");
 
 
   const handleOpenModal = () => {
@@ -83,6 +82,13 @@ const Players: React.FC = () => {
   const handleCreateTeams = (event: React.FormEvent) => {
     event.preventDefault();
 
+    if(selectedPlayers?.length > teamCount){
+      setErrorMessage(undefined);
+    }
+    else{
+      setErrorMessage("CANNOT PROCESS INVALID DATA");
+    }
+
     // Group players by rating
     const playersByRating: { [key: number]: string[] } = {};
     selectedPlayers.forEach((player) => {
@@ -112,7 +118,7 @@ const Players: React.FC = () => {
     sortedRatingGroups.forEach((rating) => {
       playersByRating[parseFloat(rating)].forEach((player) => {
         const smallestTeamIndex = findSmallestTeamIndex(totalRatings);
-        newTeams[smallestTeamIndex].push(player+": "+rating);
+        newTeams[smallestTeamIndex].push(player + ": " + rating);
         totalRatings[smallestTeamIndex] += parseFloat(rating);
       });
     });
@@ -138,7 +144,7 @@ const Players: React.FC = () => {
   return (
     <div>
       <h2>Players Page</h2>
-      <button onClick={handleOpenModal}>Open Spreadsheet Dialog</button>
+      <button className="enter-data-btn" onClick={handleOpenModal}>Enter Data</button>
 
       {isModalOpen && (
         <div className="modal">
@@ -166,18 +172,18 @@ const Players: React.FC = () => {
 
             {dataInputType === 'manual' && (
               <div>
-                <h3>Enter Players' Information Manually</h3>
+                <h4>Enter Players Information</h4>
                 <textarea
                   value={manualData}
                   onChange={(e) => setManualData(e.target.value)}
-                  placeholder="Enter players' information here (e.g., Player1:Rating1:Skill1,Player2:Rating2:Skill2)"
+                  placeholder="Player1:Rating1&#10;Player2:Rating2&#10;...."
                 />
               </div>
             )}
 
             {dataInputType === 'url' && (
               <div>
-                <h3>Enter Google Spreadsheet URL</h3>
+                <h4>Google Spreadsheet CSV URL</h4>
                 <input
                   type="text"
                   value={spreadsheetUrl}
@@ -187,7 +193,12 @@ const Players: React.FC = () => {
               </div>
             )}
 
-            <button onClick={handleProcessData}>Process</button>
+            <div className="dialog-btn-div">
+              <button className="process-btn" onClick={handleProcessData}>Process</button>
+              <button className="close-dialog-btn" onClick={handleCloseModal}>Close x</button>
+
+            </div>
+
           </div>
         </div>
       )}
@@ -212,21 +223,23 @@ const Players: React.FC = () => {
           <label className="team-count-label">
             Team Count:
             <input
-              type="number"
+              type="range"
               value={teamCount}
               onChange={handleTeamCountChange}
-              min="0"
+              min="1"
+              max="20"
               step="1"
-              className="team-count-input"
+              className="team-count-slider"
             />
+            <span className="team-count-value">{teamCount}</span>
           </label>
-          <button type="submit" className="generate-teams-button">
+          <button type="submit" className="generate-teams-button" disabled={!selectedPlayers}>
             Generate Teams
           </button>
         </form>
       </div>
 
-      {teams &&
+      {teams && !errorMessage &&
         <div className="team-container">
           <h2>Teams</h2>
           {teams.map((team, index) => (
@@ -241,6 +254,9 @@ const Players: React.FC = () => {
           ))}
         </div>
       }
+
+      {errorMessage &&
+      <h3 className="error-msg">{errorMessage}</h3>}
 
     </div>
   );
