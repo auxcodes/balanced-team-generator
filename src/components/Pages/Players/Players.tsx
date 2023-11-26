@@ -37,7 +37,6 @@ const Players: React.FC = () => {
       }
     });
 
-    console.log(displayData.length);
     return displayData;
   }
 

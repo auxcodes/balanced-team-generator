@@ -1,25 +1,25 @@
-/* Header.css */
-
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #333;
-  }
-  
-  .menu-icon {
-    background: darkcyan;
-    border: none;
-    font-size: 1.5em;
-    color: white;
-    cursor: pointer;
-  }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #333; /* You can change the background color */
+  color: #fff; /* Text color */
+}
 
-  .title {
-    margin: 0;
-    color: gray;
-    font-size: 2em;
-    text-align: center;
-  }
-  
+.menu-icon {
+  background-color: darkcyan;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2em;
+  color: #eaa7a7; /* Button color */
+}
+
+.title {
+  margin: 0;
+  font-size: 1.5em;
+  text-align: center;
+  flex-grow: 1; /* Ensures that the title takes up the remaining space */
+}
+
+/* Add more styles as needed */

@@ -9,6 +9,8 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
+
+  const prefixUrl = 'balanced-team-generator/';
   return (
     <nav className={isOpen ? 'open' : ''}>
       <ul>
