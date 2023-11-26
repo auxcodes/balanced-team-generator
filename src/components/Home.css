@@ -1,0 +1,46 @@
+.home-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.description {
+  color: #555;
+  font-size: 1.1em;
+  text-align: justify;
+}
+
+.feature-section,
+.how-to-use-section,
+.creator-info-section,
+.quote-section {
+  margin-top: 20px;
+}
+
+h3 {
+  color: #333;
+  font-size: 1.5em;
+}
+
+ul {
+  list-style-type: disc;
+  color: #555;
+  margin-left: 20px;
+}
+
+p {
+  color: #777;
+  font-size: 1.1em;
+  text-align: justify;
+}
+
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Add more styles as needed */

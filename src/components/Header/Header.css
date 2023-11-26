@@ -1,0 +1,25 @@
+/* Header.css */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #333;
+  }
+  
+  .menu-icon {
+    background: darkcyan;
+    border: none;
+    font-size: 1.5em;
+    color: white;
+    cursor: pointer;
+  }
+
+  .title {
+    margin: 0;
+    color: gray;
+    font-size: 2em;
+    text-align: center;
+  }
+  
