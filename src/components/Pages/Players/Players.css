@@ -1,13 +1,13 @@
 .enter-data-btn {
   margin: 10px 0px;
   background-color: #5a78af;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: large;
-    font-family: monospace;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: large;
+  font-family: monospace;
 }
 
 .modal {
@@ -28,36 +28,48 @@
   border-radius: 8px;
 }
 
-.dialog-btn-div{
+.dialog-btn-div {
   justify-content: space-between;
 }
 
 
-.close-dialog-btn{
+.close-dialog-btn {
   margin: 10px 0px;
-  margin-left: 45%;
+  float: right;
   background-color: red;
   color: rgb(60, 6, 6);
   padding: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: large;
-    font-family: monospace;
-    font-weight: 700;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: large;
+  font-family: monospace;
+  font-weight: 700;
 }
 
 .process-btn {
   margin: 10px 0px;
+  float: left;
   background-color: #bfb79e;
-    color: rgb(60, 6, 6);
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: large;
-    font-family: monospace;
-    font-weight: 700;
+  color: rgb(60, 6, 6);
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: large;
+  font-family: monospace;
+  font-weight: 700;
+}
+
+.share-btn {
+  margin: 10px 0px;
+  float: left;
+  background-color: blue;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .close {
@@ -80,13 +92,16 @@
 }
 
 .player-item {
-  display: flex; /* Make it a flex container */
-  align-items: center; /* Center items vertically */
+  display: flex;
+  /* Make it a flex container */
+  align-items: center;
+  /* Center items vertically */
   margin-bottom: 10px;
 }
 
 .player-item label {
-  margin-left: 10px; /* Add some space between checkbox and label */
+  margin-left: 10px;
+  /* Add some space between checkbox and label */
 }
 
 .team-count-label {
@@ -95,11 +110,13 @@
 }
 
 .team-count-slider {
-  margin-left: 10px; /* Adjust the value to set the desired space between slider and label */
+  margin-left: 10px;
+  /* Adjust the value to set the desired space between slider and label */
 }
 
 .team-count-value {
-  margin-left: 5px; /* Adjust the value to set the desired space between value and slider */
+  margin-left: 5px;
+  /* Adjust the value to set the desired space between value and slider */
 }
 
 
@@ -124,12 +141,12 @@
 
 .error-msg {
   border: 1px solid;
-			margin: 10px 0px;
-			padding: 15px 10px 15px 50px;
-			background-repeat: no-repeat;
-			background-position: 10px center;
+  margin: 10px 0px;
+  padding: 15px 10px 15px 50px;
+  background-repeat: no-repeat;
+  background-position: 10px center;
 
-      color: #D63301;
-			background-color: #FFCCBA;
-			background-image: url('https://i.imgur.com/GnyDvKN.png');
+  color: #D63301;
+  background-color: #FFCCBA;
+  background-image: url('https://i.imgur.com/GnyDvKN.png');
 }

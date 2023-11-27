@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShare } from '@fortawesome/free-solid-svg-icons';
 import './Players.css';
 
 interface PlayerModel {
@@ -13,8 +15,8 @@ const Players: React.FC = () => {
   const [spreadsheetUrl, setSpreadsheetUrl] = useState<string>('');
   const [playersData, setPlayerData] = useState<PlayerModel[]>([]);
   const [selectedPlayers, setSelectedPlayers] = useState<PlayerModel[]>([]);
-  const [teamCount, setTeamCount] = useState<number>(1);
-  const [teams, setTeams] = useState<string[][]>();
+  const [teamCount, setTeamCount] = useState<number>(2);
+  const [teams, setTeams] = useState<string[][]>([]);
   const [errorMessage, setErrorMessage] = useState<string | undefined>("No Selected Players");
 
 
@@ -40,6 +42,8 @@ const Players: React.FC = () => {
   }
 
   const handleProcessData = async () => {
+    setTeams([]);
+    setSelectedPlayers([]);
     try {
       let dataToProcess = '';
 
@@ -82,11 +86,12 @@ const Players: React.FC = () => {
   const handleCreateTeams = (event: React.FormEvent) => {
     event.preventDefault();
 
-    if(selectedPlayers?.length > teamCount){
+    if (selectedPlayers?.length >= teamCount) {
       setErrorMessage(undefined);
     }
-    else{
+    else {
       setErrorMessage("CANNOT PROCESS INVALID DATA");
+      return;
     }
 
     // Group players by rating
@@ -139,6 +144,28 @@ const Players: React.FC = () => {
     }
 
     return smallestIndex;
+  };
+
+  const handleShare = async () => {
+    const teamsText = teams
+      .map((team, index) => `Team ${index + 1}\n${team.map(player => player.split(":")[0]).join('\n')}`)
+      .join('\n\n');
+    try {
+      // Trigger the native sharing dialog
+      if (navigator.share) {
+        await navigator.share({
+          title: 'Generated Teams',
+          text: teamsText,
+        });
+      } else {
+        // Deprecated way to copy to clipboard document.execCommand('copy'); that uses useRef.select() to hidden <textarea>
+        // New way Using the Clipboard API to copy the selected text
+        await navigator.clipboard.writeText(teamsText);
+        alert('Teams data copied to clipboard! Paste it to share.');
+      }
+    } catch (error) {
+      console.error('Error sharing:', error);
+    }
   };
 
   return (
@@ -195,7 +222,7 @@ const Players: React.FC = () => {
 
             <div className="dialog-btn-div">
               <button className="process-btn" onClick={handleProcessData}>Process</button>
-              <button className="close-dialog-btn" onClick={handleCloseModal}>Close x</button>
+              <button className="close-dialog-btn" onClick={handleCloseModal}>Close</button>
 
             </div>
 
@@ -226,7 +253,7 @@ const Players: React.FC = () => {
               type="range"
               value={teamCount}
               onChange={handleTeamCountChange}
-              min="1"
+              min="2"
               max="20"
               step="1"
               className="team-count-slider"
@@ -252,11 +279,14 @@ const Players: React.FC = () => {
               </ul>
             </div>
           ))}
+          <button className="share-btn" onClick={handleShare}>
+          <FontAwesomeIcon icon={faShare} />
+          </button>
         </div>
       }
 
       {errorMessage &&
-      <h3 className="error-msg">{errorMessage}</h3>}
+        <h3 className="error-msg">{errorMessage}</h3>}
 
     </div>
   );

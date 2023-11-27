@@ -1,46 +1,48 @@
 .home-container {
-  max-width: 800px;
-  margin: 0 auto;
+  background-color: #f0f0f0; /* Set your background color */
   padding: 20px;
+  border-radius: 8px;
+  margin: 20px;
 }
 
-.description {
-  color: #555;
-  font-size: 1.1em;
-  text-align: justify;
+.description-section {
+  color: #333; /* Set your text color */
 }
 
-.feature-section,
-.how-to-use-section,
-.creator-info-section,
-.quote-section {
+.instruction {
+  margin-top: 10px;
+}
+
+.instruction-list {
+  margin-bottom: 20px;
+}
+
+.feature-section, .how-to-use-section {
   margin-top: 20px;
 }
 
-h3 {
-  color: #333;
-  font-size: 1.5em;
+h2, h3 {
+  color: #008080; /* Set your heading color */
 }
 
 ul {
   list-style-type: disc;
-  color: #555;
   margin-left: 20px;
 }
 
-p {
-  color: #777;
-  font-size: 1.1em;
-  text-align: justify;
-}
-
 a {
-  color: #007bff;
-  text-decoration: none;
+  color: #0066cc; /* Set your link color */
 }
 
 a:hover {
   text-decoration: underline;
 }
 
-/* Add more styles as needed */
+.developer-info {
+  font-family: 'Cosmic', sans-serif;
+  font-weight: bold;
+  font-size: 12px;
+  text-align: right;
+  margin-top: 20px;
+  color: #555; /* Set your text color */
+}
