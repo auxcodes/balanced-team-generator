@@ -25,13 +25,6 @@ const Home: React.FC = () => {
         </p>
       </div>
 
-      <div className="creator-info-section">
-        <h3>Creator Information:</h3>
-        <p>
-          This application was created by Vickykumar Patel, a Software Engineer. You can connect with Vickykumar on <a href="https://www.linkedin.com/in/vicky-patel-1519a2111/" target="_blank" rel="noopener noreferrer">LinkedIn</a>.
-        </p>
-      </div>
-
       <div className="quote-section">
         <h3>Creator's Quote:</h3>
         <p>
