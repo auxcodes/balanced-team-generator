@@ -25,12 +25,12 @@ const Home: React.FC = () => {
         </p>
       </div>
 
-      <div className="quote-section">
+      {/* <div className="quote-section">
         <h3>Creator's Quote:</h3>
         <p>
           "Credit to NGVA Volleyball Club that inspired me to build this app, which can assist many other clubs/associations in building teams using my tool. Your feedback is valuable and appreciated."
         </p>
-      </div>
+      </div> */}
     </div>
   );
 };
