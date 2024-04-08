@@ -20,9 +20,13 @@ const Home: React.FC = () => {
 
       <div className="how-to-use-section">
         <h3>How to Use:</h3>
-        <p>
-          Navigate to the "Players" page to input and process player data. Head to the "Generate Team" page to set parameters and generate balanced teams. The app provides a user-friendly interface for an efficient team generation process.
-        </p>
+        <ul>
+          <li>Navigate to the "Create Teams" page.</li>
+          <li>Click "Enter Data" Popup to insert Manual/Google Spreadsheet data.</li>
+          <li>Click "Process" and you will see all your players.</li>
+          <li>User "Team Count" Scroll and checkbox to select players.</li>
+          <li>Click "Generate Teams" BOOM ready to share.</li>
+        </ul>
       </div>
 
       {/* <div className="quote-section">
