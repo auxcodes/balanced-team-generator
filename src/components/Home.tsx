@@ -1,7 +1,15 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate hook
 import './Home.css'; // Import your CSS file for styling
+import { PATH } from '../constants/path';
 
 const Home: React.FC = () => {
+  const navigate = useNavigate(); // Initialize navigate function
+
+  const handleNavigateToLogin = () => {
+    navigate(PATH.LOGIN_PATH); // Navigate to the base path
+  };
+
   return (
     <div className="home-container">
       <p className="description">
@@ -29,12 +37,14 @@ const Home: React.FC = () => {
         </ul>
       </div>
 
-      {/* <div className="quote-section">
-        <h3>Creator's Quote:</h3>
-        <p>
-          "Credit to NGVA Volleyball Club that inspired me to build this app, which can assist many other clubs/associations in building teams using my tool. Your feedback is valuable and appreciated."
-        </p>
-      </div> */}
+      {/* Separate area for the button */}
+      <div className="bottom-area">
+        <p className="bottom-label">Already have an account?</p>
+        {/* Button to navigate to Login/Sign up page */}
+        <button onClick={handleNavigateToLogin} className="login-button">
+          Go to Login/Sign up
+        </button>
+      </div>
     </div>
   );
 };

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShare } from '@fortawesome/free-solid-svg-icons';
 import './Players.css';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 interface PlayerModel {
   name: string;
@@ -280,7 +281,7 @@ const Players: React.FC = () => {
             </div>
           ))}
           <button className="share-btn" onClick={handleShare}>
-          <FontAwesomeIcon icon={faShare} />
+          <FontAwesomeIcon icon={faShare as IconProp} />
           </button>
         </div>
       }

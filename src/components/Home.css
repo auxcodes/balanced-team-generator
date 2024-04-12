@@ -17,11 +17,13 @@
   margin-bottom: 20px;
 }
 
-.feature-section, .how-to-use-section {
+.feature-section,
+.how-to-use-section {
   margin-top: 20px;
 }
 
-h2, h3 {
+h2,
+h3 {
   color: #008080; /* Set your heading color */
 }
 
@@ -45,4 +47,30 @@ a:hover {
   text-align: right;
   margin-top: 20px;
   color: #555; /* Set your text color */
+}
+
+/* Additional styles for the bottom area */
+.bottom-area {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.bottom-label {
+  margin-bottom: 10px;
+  font-size: 14px; /* Contracted text size */
+}
+
+.login-button {
+  background-color: #6aa84f; /* Slightly darker green color */
+  color: #fff; /* Text color */
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-family: 'Cosmic', sans-serif; /* Cosmic font */
+  font-size: 16px; /* Button text size */
+}
+
+.login-button:hover {
+  background-color: #55863f; /* Darker shade of green on hover */
 }
