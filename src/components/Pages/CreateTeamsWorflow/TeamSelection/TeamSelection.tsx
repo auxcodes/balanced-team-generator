@@ -2,15 +2,16 @@ import React, { useState } from 'react';
 import { PlayerModel } from '../Models/CreateTeamsModels';
 
 interface TeamSelectionProps{
-    playersData: PlayerModel[]
+    playersData: PlayerModel[],
+    errorMessage: string | undefined,
+    setErrorMessage: (message: string | undefined) => void,
+    setTeams: (teams: string[][]) => void
 }
 
-const TeamSelection: React.FC<TeamSelectionProps> = ({playersData}) => {
+const TeamSelection: React.FC<TeamSelectionProps> = ({playersData, setErrorMessage, errorMessage, setTeams}) => {
   const [numberOfTeams, setNumberOfTeams] = useState(2);
   const [teamCount, setTeamCount] = useState<number>(2);
   const [selectedPlayers, setSelectedPlayers] = useState<PlayerModel[]>([]);
-  const [teams, setTeams] = useState<string[][]>([]);
-  const [errorMessage, setErrorMessage] = useState<string | undefined>("No Selected Players");
 
 
   const handleCheckboxChange = (player: PlayerModel) => {
