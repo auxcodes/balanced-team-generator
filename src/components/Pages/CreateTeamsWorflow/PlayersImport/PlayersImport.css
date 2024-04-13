@@ -1,0 +1,45 @@
+.players-import-container {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .players-import-container h2 {
+    text-align: center;
+    color: #008080;
+  }
+  
+  .players-import-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .players-import-list li {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+  }
+
+  .import-data-content {
+    display: flow-root;  
+  }
+  
+  .process-btn {
+    margin: 10px 0px;
+    float: left;
+    background-color: #bfb79e;
+    color: rgb(60, 6, 6);
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: large;
+    font-family: monospace;
+    font-weight: 700;
+  }
+
+  .player-count {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 20px;
+}

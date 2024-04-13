@@ -1,0 +1,59 @@
+.create-teams-workflow {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+
+    button:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+    }
+
+    button {
+        margin-top: 10px;
+        background-color: rgb(232, 81, 81); /* Updated button color */
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+}
+
+.tabs {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.number-overlay {
+    position: absolute;
+    top: 50%; /* Position the number in the middle vertically */
+    left: 50%; /* Position the number in the middle horizontally */
+    transform: translate(-50%, -50%); /* Offset to center within icon bounds */
+    font-weight: bold; /* Optional: Make the number stand out */
+    color: white; /* Optional: Adjust number color */
+    font-size: 12px; /* Optional: Adjust number size */
+  }
+
+.tab {
+    flex-grow: 1;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    border-bottom: 1px dotted #ccc;
+}
+
+.tab.active {
+    color: neon-green; /* Updated color for active tab */
+    border-bottom: 1px solid neon-green; /* Updated border for active tab */
+}
+
+.tab .dot-icon {
+    width: 12px;
+    height: 12px;
+}
+
+.content {
+    border: 1px solid #ccc;
+    background-color: white; /* Updated background color */
+}

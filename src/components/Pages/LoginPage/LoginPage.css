@@ -1,0 +1,53 @@
+.login-page {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white; /* Background color white */
+}
+
+.login-page h2 {
+    text-align: center;
+    color: light-red; /* Light-red color for heading */
+}
+
+.login-page form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-page input {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.login-page button {
+    padding: 10px;
+    background-color: neon-green; /* Neon green color for button */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.login-page p {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.login-page p span {
+    color: blue;
+    cursor: pointer;
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between; /* Align items evenly on the row */
+}
+
+.form-row input {
+    flex: 1; /* Take up remaining space */
+}
