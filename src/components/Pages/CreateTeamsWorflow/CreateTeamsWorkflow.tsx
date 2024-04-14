@@ -5,7 +5,7 @@ import { faChevronLeft, faChevronRight, faCheckCircle, faCircle as faSolidCircle
 import { faCircle as faRegularCircle } from '@fortawesome/free-regular-svg-icons';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import DisplayTeams from './DisplayTeams/DisplayTeams';
-import TeamSelection from './TeamSelection/TeamSelection';
+import SelectPlayers from './SelectPlayers/SelectPlayers';
 import ConfirmSelection from './ConfirmSelection/ConfirmSelection';
 import PlayersImport from './PlayersImport/PlayersImport';
 import { PlayerModel } from './Models/CreateTeamsModels';
@@ -14,7 +14,9 @@ const CreateTeamsWorkflow = () => {
     const [activeStep, setActiveStep] = useState(1);
     const [taskCompleted, setTaskCompleted] = useState(false);
     const [playersData, setPlayersData] = useState<PlayerModel[]>([]);
+    const [selectedPlayers, setSelectedPlayers] = useState<PlayerModel[]>([]);
     const [teams, setTeams] = useState<string[][]>([]);
+    const [teamCount, setTeamCount] = useState<number>(2);
     const [errorMessage, setErrorMessage] = useState<string | undefined>("No Selected Players");
 
 
@@ -69,13 +71,14 @@ const CreateTeamsWorkflow = () => {
                     <div>
                         <h2>Step 2</h2>
                         <p>Set Number of Teams and select playing Players.</p>
-                        <TeamSelection playersData={playersData} errorMessage={errorMessage} setErrorMessage={setErrorMessage}
-                            setTeams={setTeams} />
+                        <SelectPlayers playersData={playersData} selectedPlayers={selectedPlayers}
+                        setSelectedPlayers={setSelectedPlayers} setErrorMessage={setErrorMessage}
+                        setTeamCount={setTeamCount} teamCount={teamCount} errorMessage={errorMessage} />
                         <div>
                             <button onClick={handleBack}>
                                 <FontAwesomeIcon icon={faChevronLeft as IconProp} />
                             </button>
-                            <button onClick={handleNext} disabled={teams.length === 0}>
+                            <button onClick={handleNext} disabled={errorMessage? true: false}>
                                 <FontAwesomeIcon icon={faChevronRight as IconProp} />
                             </button>
                         </div>
@@ -85,7 +88,7 @@ const CreateTeamsWorkflow = () => {
                     <div>
                         <h2>Step 3</h2>
                         <p>Confirm Players & Ratings then Generate.</p>
-                        <ConfirmSelection />
+                        <ConfirmSelection setErrorMessage={setErrorMessage} setTeams={setTeams} selectedPlayers={selectedPlayers} teamCount={teamCount} />
                         <div>
                             <button onClick={handleBack}>
                                 <FontAwesomeIcon icon={faChevronLeft as IconProp} />

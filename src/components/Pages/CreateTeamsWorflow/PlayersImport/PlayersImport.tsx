@@ -37,7 +37,10 @@ const PlayersImport: React.FC<PlayersImportProps> = ({ playersData, setPlayersDa
       }
     });
 
-    displayData.push(...PlayerList);
+    if(displayData.length === 0){
+      displayData.push(...PlayerList);
+    }
+
     return displayData;
   }
 
