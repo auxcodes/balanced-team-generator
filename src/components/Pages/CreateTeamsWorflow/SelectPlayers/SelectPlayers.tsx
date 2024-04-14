@@ -2,17 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { PlayerModel } from '../Models/CreateTeamsModels';
 
 interface SelectPlayersProps {
-    playersData: PlayerModel[];
+    playersData: PlayerModel[],
     errorMessage: string | undefined,
-    setErrorMessage: (message: string | undefined) => void;
-    selectedPlayers: PlayerModel[];
-    setSelectedPlayers: React.Dispatch<React.SetStateAction<PlayerModel[]>>;
-    teamCount: number;
-    setTeamCount: React.Dispatch<React.SetStateAction<number>>;
+    setErrorMessage: (message: string | undefined) => void,
+    selectedPlayers: PlayerModel[],
+    setSelectedPlayers: React.Dispatch<React.SetStateAction<PlayerModel[]>>,
+    teamCount: number,
+    setTeamCount: React.Dispatch<React.SetStateAction<number>>,
+    onNext: () => void,
+    onBack: () => void,
 }
 
 const SelectPlayers: React.FC<SelectPlayersProps> = ({ playersData, errorMessage, setErrorMessage, selectedPlayers,
-    setSelectedPlayers, teamCount, setTeamCount }) => {
+    setSelectedPlayers, teamCount, setTeamCount, onBack, onNext }) => {
     const [numberOfTeams, setNumberOfTeams] = useState(2);
     const initSelectAll = selectedPlayers? selectedPlayers.length === playersData.length? 'Yes': 'Some': 'No';
     const [selectAll, setSelectAll] = useState<string>(initSelectAll);
@@ -68,6 +70,7 @@ const SelectPlayers: React.FC<SelectPlayersProps> = ({ playersData, errorMessage
 
         if (selectedPlayers.length >= teamCount) {
             setErrorMessage(undefined);
+            onNext();
         } else {
             setErrorMessage("CANNOT PROCESS INVALID DATA");
         }
@@ -99,6 +102,9 @@ const SelectPlayers: React.FC<SelectPlayersProps> = ({ playersData, errorMessage
                             <hr className="separator" />
                         </div>
                     ))}
+                    <p>
+                      Player Count: {selectedPlayers.length}
+                    </p>
                     <label className="team-count-label">
                         Team Count:
                         <input
@@ -112,12 +118,17 @@ const SelectPlayers: React.FC<SelectPlayersProps> = ({ playersData, errorMessage
                         />
                         <span className="team-count-value">{teamCount}</span>
                     </label>
-                    <button type="submit" className="generate-teams-button" disabled={selectedPlayers.length < 2}>
-                        Confirm Selection
+                    <div>
+                    <button className="generate-teams-button" onClick={onBack}>
+                        Back
                     </button>
+                    <button type="submit" className="generate-teams-button" disabled={selectedPlayers.length < 2}>
+                        Confirm
+                    </button>
+                    </div>
                 </form>
             </div>
-            {!errorMessage && <label htmlFor="teamCount">Number of Teams: {teamCount} & Players: {selectedPlayers.length}</label>}
+            {/* {!errorMessage && <label htmlFor="teamCount">Number of Teams: {teamCount} & Players: {selectedPlayers.length}</label>} */}
             
         </div>
     );

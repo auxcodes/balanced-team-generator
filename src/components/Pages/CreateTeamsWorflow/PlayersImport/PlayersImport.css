@@ -26,7 +26,6 @@
   
   .process-btn {
     margin: 10px 0px;
-    float: left;
     background-color: #bfb79e;
     color: rgb(60, 6, 6);
     padding: 10px;
@@ -42,4 +41,28 @@
     font-size: 1.2rem;
     color: #333;
     margin-bottom: 20px;
+}
+
+.dynamic-div{
+  margin-top: 5px;
+}
+
+.add-minus-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 25px; /* Set width to auto */
+  max-width: 25px; /* Set maximum width */
+  height: 25px;
+  border-radius: 50% !important;
+  background-color: #6791ba !important;
+  color: #fff;
+  margin: 0px 0px 0px 10px !important;
+  cursor: pointer;
+  font-size: x-small;
+  padding: 0px !important;
+}
+
+.add-minus-btn:hover {
+  background-color: #0056b3; /* Hover color */
 }

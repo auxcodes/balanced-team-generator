@@ -9,7 +9,7 @@
     }
 
     button {
-        margin-top: 10px;
+        margin: 10px 10px 0px 0px;
         background-color: rgb(232, 81, 81); /* Updated button color */
         color: white;
         border: none;

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './CreateTeamsWorkflow.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft, faChevronRight, faCheckCircle, faCircle as faSolidCircle } from '@fortawesome/free-solid-svg-icons';
+import { faCheckCircle, faCircle as faSolidCircle } from '@fortawesome/free-solid-svg-icons';
 import { faCircle as faRegularCircle } from '@fortawesome/free-regular-svg-icons';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import DisplayTeams from './DisplayTeams/DisplayTeams';
@@ -57,57 +57,41 @@ const CreateTeamsWorkflow = () => {
 
             <div className="content">
                 {activeStep === 1 && (
-                    <div>
-                        <h2>Import Players</h2>
-                        <PlayersImport playersData={playersData} setPlayersData={setPlayersData} />
-                        <p>
-                            <button onClick={handleNext} disabled={playersData.length === 0}>
-                                <FontAwesomeIcon icon={faChevronRight as IconProp} />
-                            </button>
-                        </p>
-                    </div>
+                    <PlayersImport
+                        playersData={playersData}
+                        setPlayersData={setPlayersData}
+                        onNext={handleNext}
+                    />
                 )}
                 {activeStep === 2 && (
-                    <div>
-                        <h2>Step 2</h2>
-                        <p>Set Number of Teams and select playing Players.</p>
-                        <SelectPlayers playersData={playersData} selectedPlayers={selectedPlayers}
-                        setSelectedPlayers={setSelectedPlayers} setErrorMessage={setErrorMessage}
-                        setTeamCount={setTeamCount} teamCount={teamCount} errorMessage={errorMessage} />
-                        <div>
-                            <button onClick={handleBack}>
-                                <FontAwesomeIcon icon={faChevronLeft as IconProp} />
-                            </button>
-                            <button onClick={handleNext} disabled={errorMessage? true: false}>
-                                <FontAwesomeIcon icon={faChevronRight as IconProp} />
-                            </button>
-                        </div>
-                    </div>
+                    <SelectPlayers
+                        playersData={playersData}
+                        selectedPlayers={selectedPlayers}
+                        setSelectedPlayers={setSelectedPlayers}
+                        setErrorMessage={setErrorMessage}
+                        setTeamCount={setTeamCount}
+                        teamCount={teamCount}
+                        errorMessage={errorMessage}
+                        onBack={handleBack}
+                        onNext={handleNext}
+                    />
                 )}
                 {activeStep === 3 && (
-                    <div>
-                        <h2>Step 3</h2>
-                        <p>Confirm Players & Ratings then Generate.</p>
-                        <ConfirmSelection setErrorMessage={setErrorMessage} setTeams={setTeams} selectedPlayers={selectedPlayers} teamCount={teamCount} />
-                        <div>
-                            <button onClick={handleBack}>
-                                <FontAwesomeIcon icon={faChevronLeft as IconProp} />
-                            </button>
-                            <button onClick={handleNext} disabled={teams.length === 0}>
-                                <FontAwesomeIcon icon={faChevronRight as IconProp} />
-                            </button>
-                        </div>
-                    </div>
+                    <ConfirmSelection
+                        setErrorMessage={setErrorMessage}
+                        setTeams={setTeams}
+                        selectedPlayers={selectedPlayers}
+                        teamCount={teamCount}
+                        onBack={handleBack}
+                        onNext={handleNext}
+                    />
                 )}
                 {activeStep === 4 && (
-                    <div>
-                        <h2>Step 4</h2>
-                        <p>Display Teams & Share it.</p>
-                        <DisplayTeams errorMessage={errorMessage} teams={teams}/>
-                        <button onClick={handleBack}>
-                            <FontAwesomeIcon icon={faChevronLeft as IconProp} />
-                        </button>
-                    </div>
+                    <DisplayTeams
+                        errorMessage={errorMessage}
+                        teams={teams}
+                        onBack={handleBack}
+                    />
                 )}
             </div>
         </div>

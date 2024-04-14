@@ -6,9 +6,10 @@ import React from 'react';
 interface DisplayTeamsProps {
     errorMessage: string | undefined,
     teams: string[][],
+    onBack: () => void,
 }
 
-const DisplayTeams: React.FC<DisplayTeamsProps> = ({ errorMessage, teams }) => {
+const DisplayTeams: React.FC<DisplayTeamsProps> = ({ errorMessage, teams, onBack }) => {
 
     const handleShare = async () => {
         const teamsText = teams
@@ -51,6 +52,10 @@ const DisplayTeams: React.FC<DisplayTeamsProps> = ({ errorMessage, teams }) => {
                     ))}
                     <button className="share-btn" onClick={handleShare}>
                         <FontAwesomeIcon icon={faShare as IconProp} />
+                    </button>
+                    <p>Not Happy {":("} with Teams go Back and re-Generate Teams. </p>
+                    <button className="share-btn" onClick={onBack}>
+                        Back
                     </button>
                 </div>
             }
