@@ -1,7 +1,8 @@
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import { faShare } from '@fortawesome/free-solid-svg-icons';
+import { faShareFromSquare } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
+import './DisplayTeams.css';
 
 interface DisplayTeamsProps {
     errorMessage: string | undefined,
@@ -34,7 +35,7 @@ const DisplayTeams: React.FC<DisplayTeamsProps> = ({ errorMessage, teams, onBack
     };
 
     return (
-        <div>
+        <div className='team-display-container'>
             <h2>Team Display</h2>
 
             {teams && !errorMessage &&
@@ -50,11 +51,11 @@ const DisplayTeams: React.FC<DisplayTeamsProps> = ({ errorMessage, teams, onBack
                             </ul>
                         </div>
                     ))}
-                    <button className="share-btn" onClick={handleShare}>
-                        <FontAwesomeIcon icon={faShare as IconProp} />
-                    </button>
                     <p>Not Happy {":("} with Teams go Back and re-Generate Teams. </p>
-                    <button className="share-btn" onClick={onBack}>
+                    <button className="display-share-btn" onClick={handleShare}>
+                        <FontAwesomeIcon icon={faShareFromSquare as IconProp} />
+                    </button>
+                    <button className="display-share-btn" onClick={onBack}>
                         Back
                     </button>
                 </div>

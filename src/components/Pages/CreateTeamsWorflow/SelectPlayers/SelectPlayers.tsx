@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './SelectPlayers.css';
 import { PlayerModel } from '../Models/CreateTeamsModels';
 
 interface SelectPlayersProps {
@@ -77,9 +78,9 @@ const SelectPlayers: React.FC<SelectPlayersProps> = ({ playersData, errorMessage
     };
 
     return (
-        <div>
+        <div className='team-selection-container'>
             <h2>Team Selection</h2>
-            <div className="container">
+            <div className="sub-container">
                 <h3>Player List</h3>
                 <form onSubmit={handleConfirmSelection} className="form">
                     <div key="Select All" className="player-item">

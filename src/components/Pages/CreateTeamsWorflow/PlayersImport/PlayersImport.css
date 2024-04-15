@@ -25,6 +25,7 @@
   }
   
   .process-btn {
+    margin: 10px 10px 0px 0px;
     margin: 10px 0px;
     background-color: #bfb79e;
     color: rgb(60, 6, 6);
@@ -43,19 +44,31 @@
     margin-bottom: 20px;
 }
 
+.dropdown-type-list {
+  padding: 5px;
+  border: 2px solid #01448b; /* Blue border */
+  border-radius: 5px;
+  background-color: #cfcee5;
+  font-size: 16px;
+  font-family: 'Cosmic Sans', sans-serif; /* Use Cosmic Sans font */
+  cursor: pointer;
+}
+
+
 .dynamic-div{
   margin-top: 5px;
 }
 
 .add-minus-btn {
+  margin: 10px 10px 0px 0px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 25px; /* Set width to auto */
+  width: 15px; /* Set width to auto */
   max-width: 25px; /* Set maximum width */
-  height: 25px;
+  height: 15px;
   border-radius: 50% !important;
-  background-color: #6791ba !important;
+  background-color: #5a7ea3 !important;
   color: #fff;
   margin: 0px 0px 0px 10px !important;
   cursor: pointer;

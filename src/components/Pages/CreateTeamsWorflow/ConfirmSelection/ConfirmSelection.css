@@ -27,15 +27,19 @@
     color: #555;
   }
   
-  .confirmation-container button {
+  /* .confirmation-container button {
     display: block;
-    width: 100%;
+    width: 25%;
     padding: 10px;
-    margin-top: 20px;
+    margin: 20px;
     background-color: #007bff;
     color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
   }
+
+  .btn-div {
+    display: flex;
+  } */
   

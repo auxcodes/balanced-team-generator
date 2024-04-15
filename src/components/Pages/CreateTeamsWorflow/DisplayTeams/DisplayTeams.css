@@ -29,13 +29,13 @@
   .team-display-container li {
     margin-bottom: 10px;
   }
-
-  .share-btn {
+/* 
+  .display-share-btn {
     margin: 10px 0px;
-    background-color: blue;
+    background-color: blue !important;
     color: white;
     padding: 10px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-  }
+  } */

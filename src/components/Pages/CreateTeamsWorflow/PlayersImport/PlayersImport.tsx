@@ -62,6 +62,13 @@ const PlayersImport: React.FC<PlayersImportProps> = ({ playersData, setPlayersDa
     return displayData;
   }
 
+  /*TODO: Remove, just populating dummy data for now. */
+  React.useEffect(()=> {
+    if(dataInputType === 'user'){
+      setPlayersData(PlayerList);
+    }
+  }, [dataInputType]);
+
   const handleProcessData = async () => {
     try {
       if (dataInputType === 'url') {
@@ -70,9 +77,12 @@ const PlayersImport: React.FC<PlayersImportProps> = ({ playersData, setPlayersDa
       } else if (dataInputType === 'manual') {
         setPlayersData(processDataToDisplay(manualData, ':'));
       } else if (dataInputType === 'dynamic insert') {
+        const allPlayers = [...dynamicPlayers.filter(player => player.name && player.rating)];
+        setDynamicPlayers(allPlayers);
         setPlayersData(dynamicPlayers);
       } else {
-        setPlayersData(PlayerList);
+        //setPlayersData(PlayerList);
+        console.log('default added',playersData);
       }
       if (playersData.length > 1) {
         onNext();
@@ -93,7 +103,7 @@ const PlayersImport: React.FC<PlayersImportProps> = ({ playersData, setPlayersDa
       return !manualData;
     }
     else if (dataInputType === 'dynamic insert') {
-      const allPlayers = [...playersData, ...dynamicPlayers.filter(player => player.name && player.rating)];
+      const allPlayers = [...dynamicPlayers.filter(player => player.name && player.rating)];
       return allPlayers.length < 2;
     }
     return undefined;
@@ -136,46 +146,23 @@ const PlayersImport: React.FC<PlayersImportProps> = ({ playersData, setPlayersDa
 
 
   return (
-    <div>
+    <div className='players-import-container'>
       <div className='import-data-content'>
         <h3>Choose Data Input Type</h3>
         <div>
-          <label>
-            <input
-              type="radio"
-              value="manual"
-              checked={dataInputType === 'manual'}
-              onChange={() => setDataInputType('manual')}
-            />
-            Manual Input
-          </label>
-          <label>
-            <input
-              type="radio"
-              value="url"
-              checked={dataInputType === 'url'}
-              onChange={() => setDataInputType('url')}
-            />
-            Google Spreadsheet URL
-          </label>
-          <label>
-            <input
-              type="radio"
-              value="user"
-              checked={dataInputType === 'user'}
-              onChange={() => setDataInputType('user')}
-            />
-            Use My Players
-          </label>
-          <label>
-            <input
-              type="radio"
-              value="dynamic insert"
-              checked={dataInputType === 'dynamic insert'}
-              onChange={() => setDataInputType('dynamic insert')}
-            />
-            Dynamic Insert
-          </label>
+        <div className="dropdown-container">
+          <select
+            className="dropdown-type-list"
+            value={dataInputType}
+            onChange={(e) => setDataInputType(e.target.value as 'manual' | 'url' | 'user' | 'dynamic insert')}
+          >
+            <option value="manual">Manual Input</option>
+            <option value="url">Google Spreadsheet URL</option>
+            <option value="user">Use My Players</option>
+            <option value="dynamic insert">Dynamic Insert</option>
+          </select>
+        </div>
+
 
           {dataInputType === 'manual' && (
             <div>

@@ -41,17 +41,21 @@ const CreateTeamsWorkflow = () => {
     return (
         <div className="create-teams-workflow">
             <div className="tabs">
-                <div className={`tab ${activeStep === 1 ? 'active' : ''}`} onClick={() => setActiveStep(1)}>
-                    <FontAwesomeIcon icon={(activeStep == 1 ? faSolidCircle: faCheckCircle) as IconProp} className="dot-icon" />
+                <div className={`tab ${activeStep === 1 ? 'active' : activeStep > 1? 'done':''}`} onClick={() => setActiveStep(1)}>
+                    <FontAwesomeIcon icon={(activeStep == 1 ? faSolidCircle : faCheckCircle) as IconProp} 
+                        className="dot-icon" />
                 </div>
-                <div className={`tab ${activeStep === 2 ? 'active' : ''}`} onClick={() => setActiveStep(2)}>
-                    <FontAwesomeIcon icon={(activeStep == 2 ? faSolidCircle : activeStep < 2?faRegularCircle: faCheckCircle) as IconProp} className="dot-icon" />
+                <div className={`tab ${activeStep === 2 ? 'active' : activeStep > 2? 'done':''}`} onClick={() => setActiveStep(2)}>
+                    <FontAwesomeIcon icon={(activeStep == 2 ? faSolidCircle : activeStep < 2 ? faRegularCircle : faCheckCircle) as IconProp} 
+                        className="dot-icon" />
                 </div>
-                <div className={`tab ${activeStep === 3 && taskCompleted ? 'active' : ''}`} onClick={() => setActiveStep(3)}>
-                    <FontAwesomeIcon icon={(taskCompleted && activeStep >= 3 ? faSolidCircle : activeStep < 3?faRegularCircle: faCheckCircle) as IconProp} className="dot-icon" />
+                <div className={`tab ${activeStep === 3 ? 'active' : activeStep > 3? 'done':''}`} onClick={() => setActiveStep(3)}>
+                    <FontAwesomeIcon icon={(activeStep == 3 ? faSolidCircle : activeStep < 3 ? faRegularCircle : faCheckCircle) as IconProp} 
+                        className="dot-icon" />
                 </div>
-                <div className={`tab ${activeStep === 4 && taskCompleted ? 'active' : ''}`} onClick={() => setActiveStep(4)}>
-                    <FontAwesomeIcon icon={(taskCompleted && activeStep >= 4 ? faSolidCircle : activeStep < 4?faRegularCircle: faCheckCircle) as IconProp} className="dot-icon" />
+                <div className={`tab ${activeStep === 4? 'active' : ''}`} onClick={() => setActiveStep(4)}>
+                    <FontAwesomeIcon icon={(activeStep == 4 ? faSolidCircle : activeStep < 4 ? faRegularCircle : faCheckCircle) as IconProp} 
+                        className="dot-icon" />
                 </div>
             </div>
 

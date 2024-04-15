@@ -10,7 +10,8 @@
 
     button {
         margin: 10px 10px 0px 0px;
-        background-color: rgb(232, 81, 81); /* Updated button color */
+        background-color: rgb(232, 81, 81);
+        /* Updated button color */
         color: white;
         border: none;
         border-radius: 5px;
@@ -21,18 +22,24 @@
 
 .tabs {
     display: flex;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .number-overlay {
     position: absolute;
-    top: 50%; /* Position the number in the middle vertically */
-    left: 50%; /* Position the number in the middle horizontally */
-    transform: translate(-50%, -50%); /* Offset to center within icon bounds */
-    font-weight: bold; /* Optional: Make the number stand out */
-    color: white; /* Optional: Adjust number color */
-    font-size: 12px; /* Optional: Adjust number size */
-  }
+    top: 50%;
+    /* Position the number in the middle vertically */
+    left: 50%;
+    /* Position the number in the middle horizontally */
+    transform: translate(-50%, -50%);
+    /* Offset to center within icon bounds */
+    font-weight: bold;
+    /* Optional: Make the number stand out */
+    color: rgb(163, 10, 10);
+    /* Optional: Adjust number color */
+    font-size: 12px;
+    /* Optional: Adjust number size */
+}
 
 .tab {
     flex-grow: 1;
@@ -40,20 +47,42 @@
     text-align: center;
     cursor: pointer;
     border: none;
-    border-bottom: 1px dotted #ccc;
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+    border-bottom: 2px dotted #001a00; /* Dark green dotted line for completed tab bottom border */
+    background-color: rgb(231, 234, 229);
+}
+
+.tab:hover {
+    background-color: #c2e9c2; /* Light green for tab hover background */
 }
 
 .tab.active {
-    color: neon-green; /* Updated color for active tab */
-    border-bottom: 1px solid neon-green; /* Updated border for active tab */
+    color: #2c3e36; /* Dark green for active tab text */
+    border-bottom: 4px solid #001a00; /* Dark green for active tab bottom border */
+    background-color: #92b6a8; /* Light green for active tab background */
 }
 
-.tab .dot-icon {
-    width: 12px;
-    height: 12px;
+.tab.done {
+    color: #2f4d2f; /* Darker green for completed tab text */
+    background-color: #b3d6cb; /* Light green for completed tab background */
+    border-bottom: 2px solid #001a00; /* Dark green dotted line for completed tab bottom border */
+
+}
+
+.dot-icon {
+    font-size: 15px; /* Adjust the size of the icons as needed */
+    color: #0b3a0b; /* Dark green for default icon color */
+}
+
+.active .dot-icon {
+    color: #0b410b; /* Darker green for active step icon */
+}
+
+.done .dot-icon {
+    color: #46b846; /* Light green for completed step icon */
 }
 
 .content {
     border: 1px solid #ccc;
-    background-color: white; /* Updated background color */
+    background-color: #fff; /* Updated background color */
 }

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './ConfirmSelection.css';
 import { PlayerModel } from '../Models/CreateTeamsModels';
 
 interface ConfirmSelectionProps {
@@ -76,8 +77,8 @@ const ConfirmSelection: React.FC<ConfirmSelectionProps> = ({ setErrorMessage, se
     };
 
     return (
-        <div>
-            <h2>Confirmation</h2>
+        <div className='confirmation-container'>
+            <h2>Review Selection</h2>
             <h3>Players Playing:</h3>
             <ul>
                 {selectedPlayers.map((player, index) => (
@@ -85,7 +86,7 @@ const ConfirmSelection: React.FC<ConfirmSelectionProps> = ({ setErrorMessage, se
                 ))}
             </ul>
             <h2>Number of Teams: {teamCount}</h2>
-            <div>
+            <div className='btn-div'>
                 <button onClick={onBack}>Back</button>
                 <button onClick={handleGenerateTeams}>Generate Teams</button>
             </div>
