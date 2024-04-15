@@ -78,10 +78,9 @@ const PlayersImport: React.FC<PlayersImportProps> = ({ playersData, setPlayersDa
         setPlayersData(processDataToDisplay(manualData, ':'));
       } else if (dataInputType === 'dynamic insert') {
         const allPlayers = [...dynamicPlayers.filter(player => player.name && player.rating)];
-        setDynamicPlayers(allPlayers);
-        setPlayersData(dynamicPlayers);
+        setPlayersData(allPlayers);
       } else {
-        //setPlayersData(PlayerList);
+        setPlayersData(PlayerList);
         console.log('default added',playersData);
       }
       if (playersData.length > 1) {
