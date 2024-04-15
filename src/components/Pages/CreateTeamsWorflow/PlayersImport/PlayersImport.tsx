@@ -81,7 +81,6 @@ const PlayersImport: React.FC<PlayersImportProps> = ({ playersData, setPlayersDa
         setPlayersData(allPlayers);
       } else {
         setPlayersData(PlayerList);
-        console.log('default added',playersData);
       }
       if (playersData.length > 1) {
         onNext();
@@ -135,7 +134,7 @@ const PlayersImport: React.FC<PlayersImportProps> = ({ playersData, setPlayersDa
     const options = [];
     for (let rating = 1.0; rating <= 5.0; rating += 0.5) {
       options.push(
-        <option key={rating} value={rating.toFixed(1)}>
+        <option key={rating} value={rating}>
           {rating.toFixed(1)}
         </option>
       );
