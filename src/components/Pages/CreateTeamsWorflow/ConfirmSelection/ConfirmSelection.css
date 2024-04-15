@@ -27,7 +27,7 @@
     color: #555;
   }
   
-  /* .confirmation-container button {
+  .confirmation-container button {
     display: block;
     width: 25%;
     padding: 10px;
@@ -37,9 +37,18 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+
+    margin: 10px 10px 0px 0px;
+        background-color: rgb(232, 81, 81);
+        /* Updated button color */
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
   }
 
   .btn-div {
     display: flex;
-  } */
+  }
   
