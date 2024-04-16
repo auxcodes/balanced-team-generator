@@ -1,26 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import './Players.css';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { UserContext } from '../../../App';
 
 interface PlayerModel {
   name: string;
   rating: number;
 }
 
-interface PlayersProps {
-  playersData: PlayerModel[];
-  setPlayersData: React.Dispatch<React.SetStateAction<PlayerModel[]>>;
-}
-
-const Players: React.FC<PlayersProps> = ({ playersData, setPlayersData }) => {
+const Players = () => {
   const [editMode, setEditMode] = useState<boolean>(false);
   const [updatedPlayersData, setUpdatedPlayersData] = useState<PlayerModel[]>([]);
+  const {userPlayers, setUserPlayers} = useContext(UserContext);
 
   useEffect(() => {
-    setUpdatedPlayersData([...playersData]);
-  }, [playersData]);
+    setUpdatedPlayersData([...userPlayers]);
+  }, [userPlayers]);
 
   const handleAddPlayer = () => {
     setUpdatedPlayersData([...updatedPlayersData, { name: '', rating: 1.0 }]);
@@ -34,7 +31,7 @@ const Players: React.FC<PlayersProps> = ({ playersData, setPlayersData }) => {
 
   const savePlayerChanges = () => {
     const allPlayers = [...updatedPlayersData.filter(player => player.name && player.rating)];
-    setPlayersData(allPlayers);
+    setUserPlayers(allPlayers);
     setEditMode(false); // Exit edit mode after saving changes
   };
 
@@ -43,7 +40,7 @@ const Players: React.FC<PlayersProps> = ({ playersData, setPlayersData }) => {
   };
 
   const handleCancel = () => {
-    setUpdatedPlayersData(playersData);
+    setUpdatedPlayersData(userPlayers);
     setEditMode(false);
   }
 
@@ -57,7 +54,6 @@ const Players: React.FC<PlayersProps> = ({ playersData, setPlayersData }) => {
         {updatedPlayersData.map((player, index) => (
           <div key={index} className="player-item">
             <div className="player-name">
-              <span>{index+1}. </span>
               {editMode ? (
                 <input
                   type="text"
@@ -82,7 +78,7 @@ const Players: React.FC<PlayersProps> = ({ playersData, setPlayersData }) => {
                     setUpdatedPlayersData(updatedPlayers);
                   }}
                 >
-                  {[...Array(10)].map((_, i) => (
+                  {[...Array(9)].map((_, i) => (
                     <option key={i} value={(i * 0.5 + 1).toFixed(1)}>
                       {(i * 0.5 + 1).toFixed(1)}
                     </option>
@@ -94,7 +90,7 @@ const Players: React.FC<PlayersProps> = ({ playersData, setPlayersData }) => {
             </div>
             <div className="add-remove-buttons">
               {editMode && (
-                <button className="add-minus-btn" onClick={() => handleRemovePlayer(index)}>
+                <button className="add-minus-player-btn" onClick={() => handleRemovePlayer(index)}>
                   <FontAwesomeIcon icon={faMinus as IconProp} />
                 </button>
               )}
@@ -104,7 +100,8 @@ const Players: React.FC<PlayersProps> = ({ playersData, setPlayersData }) => {
 
         <div className='add-players-div'>
         {editMode && (
-                <button className="add-minus-btn" onClick={handleAddPlayer}>
+                <button className="add-minus-player-btn" onClick={handleAddPlayer} 
+                disabled={updatedPlayersData[updatedPlayersData.length-1].name?false:true}>
                   <FontAwesomeIcon icon={faPlus as IconProp} />
                 </button>
               )}

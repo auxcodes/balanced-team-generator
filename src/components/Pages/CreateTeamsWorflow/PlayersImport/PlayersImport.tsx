@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './PlayersImport.css';
 import { PlayerModel } from '../Models/CreateTeamsModels';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import { PlayerList } from '../../../../mocks/PlayerMock';
+import { UserContext } from '../../../../App';
 
 interface PlayersImportProps {
   playersData: PlayerModel[],
@@ -17,6 +17,7 @@ const PlayersImport: React.FC<PlayersImportProps> = ({ playersData, setPlayersDa
   const [manualData, setManualData] = useState<string>('');
   const [spreadsheetUrl, setSpreadsheetUrl] = useState<string>('');
   const [dynamicPlayers, setDynamicPlayers] = useState<PlayerModel[]>([{ name: '', rating: 1.0 }]);
+  const userPlayers = useContext(UserContext).userPlayers;
 
   const fetchDataFromUrl = async (url: string): Promise<string> => {
     // Replace this with actual asynchronous logic to fetch data from the Google Sheets API
@@ -41,7 +42,7 @@ const PlayersImport: React.FC<PlayersImportProps> = ({ playersData, setPlayersDa
   /*TODO: Remove, just populating dummy data for now. */
   React.useEffect(()=> {
     if(dataInputType === 'user'){
-      setPlayersData(PlayerList);
+      setPlayersData(userPlayers);
     }
   }, [dataInputType]);
 
@@ -56,7 +57,10 @@ const PlayersImport: React.FC<PlayersImportProps> = ({ playersData, setPlayersDa
         const allPlayers = [...dynamicPlayers.filter(player => player.name && player.rating)];
         setPlayersData(allPlayers);
       } else {
-        setPlayersData(PlayerList);
+        setPlayersData(userPlayers);
+        if (playersData.length > 1) {
+          onNext();
+        }
       }
       if (playersData.length > 1) {
         onNext();
@@ -163,7 +167,8 @@ const PlayersImport: React.FC<PlayersImportProps> = ({ playersData, setPlayersDa
 
           {dataInputType === 'user' && (
             <div>
-              <h4>Click process if you are ok with the ratings.</h4>
+              <h4>You have {userPlayers.length} players</h4>
+              <p>Go to Players page to update ratings.</p>
             </div>
           )}
 

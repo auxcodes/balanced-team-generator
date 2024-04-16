@@ -1,5 +1,5 @@
 .container {
-  background-color: #c4e4ff; /* Light Blue */
+  background-color: #ebe8d6; /* Light Blue */
   padding: 20px;
   border-radius: 10px;
 }
@@ -7,13 +7,12 @@
 .player-item {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   margin-bottom: 10px;
   font-family: 'TechFont', sans-serif; /* Tech font for player data */
 }
 
 .player-name {
-  flex: 1;
+  min-width: 120px;
 }
 
 .player-name input, .player-name select {
@@ -38,22 +37,34 @@
   align-items: center;
 }
 
-.add-minus-btn {
-  margin-left: 10px;
-  padding: 5px 10px;
-  border-radius: 5px;
-  background-color: #2ecc71; /* Green */
+.add-minus-player-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px; /* Set width to auto */
+  max-width: 25px; /* Set maximum width */
+  height: 20px;
+  border-radius: 50% !important;
+  background-color: #7fb9e0; 
+  border: 1px solid rgb(7, 73, 187);
   color: #fff;
-  border: none;
+  margin: 0px 0px 0px 10px;
   cursor: pointer;
+  font-size: x-small;
+  padding: 0px !important;
 }
 
-.add-minus-btn:hover {
-  background-color: #27ae60; /* Darker Green */
+.add-minus-player-btn:hover {
+  background-color: #1575b5;
+}
+
+.add-minus-player-btn:disabled{
+  background-color: lightgray;
+  cursor: not-allowed;
 }
 
 .edit-players-button {
-  margin-top: 10px;
+  margin: 10px 20px;
   padding: 10px 20px;
   border-radius: 5px;
   background-color: #e74c3c; /* Red */
@@ -101,5 +112,5 @@
 }
 
 .add-players-div{
-  display: ruby-text;
+  padding-left: 100px;
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { createContext, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Sidebar from './components/Sidebar/Sidebar';
@@ -10,6 +10,17 @@ import CreateTeamsWorkflow from './components/Pages/CreateTeamsWorflow/CreateTea
 import LoginPage from './components/Pages/LoginPage/LoginPage';
 import { PlayerModel } from './components/Pages/CreateTeamsWorflow/Models/CreateTeamsModels';
 import { PlayerList } from './mocks/PlayerMock';
+
+
+interface AppUserContext{
+  userPlayers: PlayerModel[],
+  setUserPlayers: React.Dispatch<React.SetStateAction<PlayerModel[]>>
+}
+export const UserContext = createContext<AppUserContext>({
+  userPlayers: [],
+  setUserPlayers: () => {}
+});
+
 
 const App: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
@@ -25,6 +36,7 @@ const App: React.FC = () => {
   }, []);
 
   return (
+    <UserContext.Provider value={{userPlayers, setUserPlayers}}>
     <Router>
       <div className="App">
         <div className={`${isSidebarOpen ? 'leftDisplay' : 'leftHide'}`}>
@@ -46,7 +58,7 @@ const App: React.FC = () => {
               />
               <Route
                 path={PATH.PLAYER_PATH}
-                element={isLoggedIn ? <Players playersData={userPlayers} setPlayersData={setUserPlayers}/> : <Navigate to={PATH.LOGIN_PATH} />}
+                element={isLoggedIn ? <Players /> : <Navigate to={PATH.LOGIN_PATH} />}
               />
               <Route
                 path={PATH.CREATE_TEAMS_PATH}
@@ -57,6 +69,7 @@ const App: React.FC = () => {
         </div>
       </div>
     </Router>
+    </UserContext.Provider>
   );
 };
 
