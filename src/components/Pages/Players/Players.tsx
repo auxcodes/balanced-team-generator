@@ -1,294 +1,124 @@
-import React, { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShare } from '@fortawesome/free-solid-svg-icons';
+import React, { useState, useEffect } from 'react';
 import './Players.css';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 interface PlayerModel {
   name: string;
   rating: number;
 }
 
-const Players: React.FC = () => {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [dataInputType, setDataInputType] = useState<'manual' | 'url'>('manual');
-  const [manualData, setManualData] = useState<string>('');
-  const [spreadsheetUrl, setSpreadsheetUrl] = useState<string>('');
-  const [playersData, setPlayerData] = useState<PlayerModel[]>([]);
-  const [selectedPlayers, setSelectedPlayers] = useState<PlayerModel[]>([]);
-  const [teamCount, setTeamCount] = useState<number>(2);
-  const [teams, setTeams] = useState<string[][]>([]);
-  const [errorMessage, setErrorMessage] = useState<string | undefined>("No Selected Players");
+interface PlayersProps {
+  playersData: PlayerModel[];
+  setPlayersData: React.Dispatch<React.SetStateAction<PlayerModel[]>>;
+}
 
+const Players: React.FC<PlayersProps> = ({ playersData, setPlayersData }) => {
+  const [editMode, setEditMode] = useState<boolean>(false);
+  const [updatedPlayersData, setUpdatedPlayersData] = useState<PlayerModel[]>([]);
 
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
+  useEffect(() => {
+    setUpdatedPlayersData([...playersData]);
+  }, [playersData]);
+
+  const handleAddPlayer = () => {
+    setUpdatedPlayersData([...updatedPlayersData, { name: '', rating: 1.0 }]);
   };
 
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
+  const handleRemovePlayer = (index: number) => {
+    const updatedPlayers = [...updatedPlayersData];
+    updatedPlayers.splice(index, 1);
+    setUpdatedPlayersData(updatedPlayers);
   };
 
-  const processDataToDisplay = (dataToProcess: string, delimiter: string) => {
-    let displayData: PlayerModel[] = [];
-    const lines = dataToProcess.split("\n");
-    lines.forEach(line => {
-      const player = line.split(delimiter);
-      if (parseFloat(player[1])) {
-        displayData.push({ name: player[0], rating: parseFloat(player[1]) });
-      }
-    });
+  const savePlayerChanges = () => {
+    const allPlayers = [...updatedPlayersData.filter(player => player.name && player.rating)];
+    setPlayersData(allPlayers);
+    setEditMode(false); // Exit edit mode after saving changes
+  };
 
-    return displayData;
+  const handleEdit = () => {
+    setEditMode(!editMode);
+  };
+
+  const handleCancel = () => {
+    setUpdatedPlayersData(playersData);
+    setEditMode(false);
   }
-
-  const handleProcessData = async () => {
-    setTeams([]);
-    setSelectedPlayers([]);
-    try {
-      let dataToProcess = '';
-
-      if (dataInputType === 'url' && spreadsheetUrl) {
-        dataToProcess = await fetchDataFromUrl(spreadsheetUrl);
-        setPlayerData(processDataToDisplay(dataToProcess, ','));
-      } else {
-        dataToProcess = manualData;
-        setPlayerData(processDataToDisplay(dataToProcess, ':'));
-      }
-    } catch (error) {
-      console.error('Error processing data:', error);
-    }
-
-    handleCloseModal();
-  };
-
-  const fetchDataFromUrl = async (url: string): Promise<string> => {
-    // Replace this with actual asynchronous logic to fetch data from the Google Sheets API
-    const response = await fetch(url);
-    const data = await response.text();
-    return data;
-  };
-
-  const handleCheckboxChange = (player: PlayerModel) => {
-    // Toggle the selected state of the player
-    setSelectedPlayers((prevSelectedPlayers) =>
-      prevSelectedPlayers.includes(player)
-        ? prevSelectedPlayers.filter((playerName) => playerName !== player)
-        : [...prevSelectedPlayers, player]
-    );
-  };
-
-  const handleTeamCountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    // Ensure the team count is a positive integer
-    const count = parseInt(event.target.value, 10);
-    setTeamCount(count > 0 ? count : 0);
-  };
-
-  const handleCreateTeams = (event: React.FormEvent) => {
-    event.preventDefault();
-
-    if (selectedPlayers?.length >= teamCount) {
-      setErrorMessage(undefined);
-    }
-    else {
-      setErrorMessage("CANNOT PROCESS INVALID DATA");
-      return;
-    }
-
-    // Group players by rating
-    const playersByRating: { [key: number]: string[] } = {};
-    selectedPlayers.forEach((player) => {
-      const rating = player.rating;
-      if (!playersByRating[rating]) {
-        playersByRating[rating] = [];
-      }
-      playersByRating[rating].push(player.name);
-    });
-
-    // Shuffle individual arrays within each rating group
-    Object.keys(playersByRating).forEach((rating) => {
-      const numericRating = parseFloat(rating);
-      if (!isNaN(numericRating)) {
-        playersByRating[parseFloat(rating)] = playersByRating[parseFloat(rating)].sort(() => Math.random() - 0.5);
-      }
-    });
-
-    // Sort rating groups by descending order of ratings
-    const sortedRatingGroups = Object.keys(playersByRating).sort((a, b) => parseFloat(b) - parseFloat(a));
-
-    // Initialize teams and total ratings array
-    const newTeams: string[][] = Array.from({ length: teamCount }, () => []);
-    const totalRatings: number[] = Array.from({ length: teamCount }, () => 0);
-
-    // Assign players to teams in a round-robin fashion within each rating group
-    sortedRatingGroups.forEach((rating) => {
-      playersByRating[parseFloat(rating)].forEach((player) => {
-        const smallestTeamIndex = findSmallestTeamIndex(totalRatings);
-        newTeams[smallestTeamIndex].push(player + ": " + rating);
-        totalRatings[smallestTeamIndex] += parseFloat(rating);
-      });
-    });
-
-    setTeams(newTeams.sort(() => Math.random() - 0.5));
-  };
-
-  // Helper function to find the index of the team with the smallest total rating
-  const findSmallestTeamIndex = (totalRatings: number[]) => {
-    let smallestIndex = 0;
-    let smallestRating = totalRatings[0];
-
-    for (let i = 1; i < totalRatings.length; i++) {
-      if (totalRatings[i] < smallestRating) {
-        smallestIndex = i;
-        smallestRating = totalRatings[i];
-      }
-    }
-
-    return smallestIndex;
-  };
-
-  const handleShare = async () => {
-    const teamsText = teams
-      .map((team, index) => `Team ${index + 1}\n${team.map(player => player.split(":")[0]).join('\n')}`)
-      .join('\n\n');
-    try {
-      // Trigger the native sharing dialog
-      if (navigator.share) {
-        await navigator.share({
-          title: 'Generated Teams',
-          text: teamsText,
-        });
-      } else {
-        // Deprecated way to copy to clipboard document.execCommand('copy'); that uses useRef.select() to hidden <textarea>
-        // New way Using the Clipboard API to copy the selected text
-        await navigator.clipboard.writeText(teamsText);
-        alert('Teams data copied to clipboard! Paste it to share.');
-      }
-    } catch (error) {
-      console.error('Error sharing:', error);
-    }
-  };
 
   return (
     <div>
       <h2>Players Page</h2>
-      <button className="enter-data-btn" onClick={handleOpenModal}>Enter Data</button>
-
-      {isModalOpen && (
-        <div className="modal">
-          <div className="modal-content">
-            <span className="close" onClick={handleCloseModal}>&times;</span>
-            <h3>Choose Data Input Type</h3>
-            <label>
-              <input
-                type="radio"
-                value="manual"
-                checked={dataInputType === 'manual'}
-                onChange={() => setDataInputType('manual')}
-              />
-              Manual Input
-            </label>
-            <label>
-              <input
-                type="radio"
-                value="url"
-                checked={dataInputType === 'url'}
-                onChange={() => setDataInputType('url')}
-              />
-              Google Spreadsheet URL
-            </label>
-
-            {dataInputType === 'manual' && (
-              <div>
-                <h4>Enter Players Information</h4>
-                <textarea
-                  value={manualData}
-                  onChange={(e) => setManualData(e.target.value)}
-                  placeholder="Player1:Rating1&#10;Player2:Rating2&#10;...."
-                />
-              </div>
-            )}
-
-            {dataInputType === 'url' && (
-              <div>
-                <h4>Google Spreadsheet CSV URL</h4>
-                <input
-                  type="text"
-                  value={spreadsheetUrl}
-                  onChange={(e) => setSpreadsheetUrl(e.target.value)}
-                  placeholder="Enter URL"
-                />
-              </div>
-            )}
-
-            <div className="dialog-btn-div">
-              <button className="process-btn" onClick={handleProcessData}>Process</button>
-              <button className="close-dialog-btn" onClick={handleCloseModal}>Close</button>
-
-            </div>
-
-          </div>
-        </div>
-      )}
 
       <div className="container">
         <h3>Player List</h3>
-        <form onSubmit={handleCreateTeams} className="form">
-          {playersData &&
-            playersData.map((player) => (
-              <div key={player.name} className="player-item">
+
+        {updatedPlayersData.map((player, index) => (
+          <div key={index} className="player-item">
+            <div className="player-name">
+              <span>{index+1}. </span>
+              {editMode ? (
                 <input
-                  type="checkbox"
-                  checked={selectedPlayers.includes(player)}
-                  onChange={() => handleCheckboxChange(player)}
+                  type="text"
+                  value={player.name}
+                  onChange={(e) => {
+                    const updatedPlayers = [...updatedPlayersData];
+                    updatedPlayers[index].name = e.target.value;
+                    setUpdatedPlayersData(updatedPlayers);
+                  }}
                 />
-                <p><b>
-                  {player.name + ": " + player.rating}
-                </b></p>
-                <hr className="separator" />
-              </div>
-            ))}
-          <label className="team-count-label">
-            Team Count:
-            <input
-              type="range"
-              value={teamCount}
-              onChange={handleTeamCountChange}
-              min="2"
-              max="20"
-              step="1"
-              className="team-count-slider"
-            />
-            <span className="team-count-value">{teamCount}</span>
-          </label>
-          <button type="submit" className="generate-teams-button" disabled={!selectedPlayers}>
-            Generate Teams
-          </button>
-        </form>
-      </div>
-
-      {teams && !errorMessage &&
-        <div className="team-container">
-          <h2>Teams</h2>
-          {teams.map((team, index) => (
-            <div key={index} className="team">
-              <p>Team {index + 1}:</p>
-              <ul>
-                {team.map((player, playerIndex) => (
-                  <li key={playerIndex}>{player}</li>
-                ))}
-              </ul>
+              ) : (
+                player.name
+              )}
             </div>
-          ))}
-          <button className="share-btn" onClick={handleShare}>
-          <FontAwesomeIcon icon={faShare as IconProp} />
-          </button>
+            <div className="player-rating">
+              {editMode ? (
+                <select
+                  value={player.rating}
+                  onChange={(e) => {
+                    const updatedPlayers = [...updatedPlayersData];
+                    updatedPlayers[index].rating = parseFloat(e.target.value);
+                    setUpdatedPlayersData(updatedPlayers);
+                  }}
+                >
+                  {[...Array(10)].map((_, i) => (
+                    <option key={i} value={(i * 0.5 + 1).toFixed(1)}>
+                      {(i * 0.5 + 1).toFixed(1)}
+                    </option>
+                  ))}
+                </select>
+              ) : (
+                player.rating.toFixed(1)
+              )}
+            </div>
+            <div className="add-remove-buttons">
+              {editMode && (
+                <button className="add-minus-btn" onClick={() => handleRemovePlayer(index)}>
+                  <FontAwesomeIcon icon={faMinus as IconProp} />
+                </button>
+              )}
+            </div>
+          </div>
+        ))}
+
+        <div className='add-players-div'>
+        {editMode && (
+                <button className="add-minus-btn" onClick={handleAddPlayer}>
+                  <FontAwesomeIcon icon={faPlus as IconProp} />
+                </button>
+              )}
         </div>
-      }
 
-      {errorMessage &&
-        <h3 className="error-msg">{errorMessage}</h3>}
-
+        <button className="edit-players-button" onClick={editMode?handleCancel: handleEdit}>
+          {editMode ? 'Cancel' : 'Edit'}
+        </button>
+        {editMode && (
+          <button className="edit-players-button" onClick={savePlayerChanges}>
+            Save
+          </button>
+        )}
+      </div>
     </div>
   );
 };

@@ -4,6 +4,7 @@ import { PlayerModel } from '../Models/CreateTeamsModels';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { PlayerList } from '../../../../mocks/PlayerMock';
 
 interface PlayersImportProps {
   playersData: PlayerModel[],
@@ -16,31 +17,6 @@ const PlayersImport: React.FC<PlayersImportProps> = ({ playersData, setPlayersDa
   const [manualData, setManualData] = useState<string>('');
   const [spreadsheetUrl, setSpreadsheetUrl] = useState<string>('');
   const [dynamicPlayers, setDynamicPlayers] = useState<PlayerModel[]>([{ name: '', rating: 1.0 }]);
-
-
-  const PlayerList: PlayerModel[] = [
-    { name: 'Vicky', rating: 1 },
-    { name: 'Bappi', rating: 2 },
-    { name: 'HJ', rating: 4.5 },
-    { name: 'Allu', rating: 5.0 },
-    { name: 'Kent', rating: 4.0 },
-    { name: 'Neal', rating: 1 },
-    { name: 'Nishil', rating: 2 },
-    { name: 'JK', rating: 4.5 },
-    { name: 'DD', rating: 5.0 },
-    { name: 'PP', rating: 4.0 },
-    { name: 'Pintu', rating: 1 },
-    { name: 'JP', rating: 2.5 },
-    { name: 'Jiya', rating: 3.0 },
-    { name: 'Mamta', rating: 3.0 },
-    { name: 'Roshanda', rating: 3.5 },
-    { name: 'Nikki', rating: 3.0 },
-    { name: 'Sesha', rating: 4.0 },
-    { name: 'Bhartiya', rating: 3.5 },
-    { name: 'Krups', rating: 4.5 },
-    { name: 'Sanjay Dutt', rating: 4.0 },
-    { name: 'Roops', rating: 3.5 }
-  ];
 
   const fetchDataFromUrl = async (url: string): Promise<string> => {
     // Replace this with actual asynchronous logic to fetch data from the Google Sheets API

@@ -1,152 +1,105 @@
-.enter-data-btn {
-  margin: 10px 0px;
-  background-color: #5a78af;
-  color: white;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: large;
-  font-family: monospace;
-}
-
-.modal {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-}
-
-.modal-content {
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-}
-
-.dialog-btn-div {
-  justify-content: space-between;
-}
-
-
-.close-dialog-btn {
-  margin: 10px 0px;
-  float: right;
-  background-color: red;
-  color: rgb(60, 6, 6);
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: large;
-  font-family: monospace;
-  font-weight: 700;
-}
-
-.process-btn {
-  margin: 10px 0px;
-  float: left;
-  background-color: #bfb79e;
-  color: rgb(60, 6, 6);
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: large;
-  font-family: monospace;
-  font-weight: 700;
-}
-
-.share-btn {
-  margin: 10px 0px;
-  float: left;
-  background-color: blue;
-  color: white;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 1.5em;
-  cursor: pointer;
-}
-
 .container {
+  background-color: #c4e4ff; /* Light Blue */
   padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.form {
-  display: flex;
-  flex-direction: column;
+  border-radius: 10px;
 }
 
 .player-item {
   display: flex;
-  /* Make it a flex container */
   align-items: center;
-  /* Center items vertically */
+  justify-content: space-between;
   margin-bottom: 10px;
+  font-family: 'TechFont', sans-serif; /* Tech font for player data */
 }
 
-.player-item label {
+.player-name {
+  flex: 1;
+}
+
+.player-name input, .player-name select {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #3498db; /* Blue */
+  background-color: #eaf6ff; /* Lighter Blue */
+  font-family: 'TechFont', sans-serif; /* Tech font for input fields */
+}
+
+.player-name input:focus, .player-name select:focus {
+  outline: none;
+  border-color: #2980b9; /* Darker Blue on focus */
+}
+
+.player-rating {
   margin-left: 10px;
-  /* Add some space between checkbox and label */
 }
 
-.team-count-label {
+.add-remove-buttons {
   display: flex;
   align-items: center;
 }
 
-.team-count-slider {
+.add-minus-btn {
   margin-left: 10px;
-  /* Adjust the value to set the desired space between slider and label */
-}
-
-.team-count-value {
-  margin-left: 5px;
-  /* Adjust the value to set the desired space between value and slider */
-}
-
-
-.generate-teams-button {
-  margin-top: 10px;
-  background-color: #4caf50;
-  color: white;
-  padding: 10px;
-  border: none;
+  padding: 5px 10px;
   border-radius: 5px;
+  background-color: #2ecc71; /* Green */
+  color: #fff;
+  border: none;
   cursor: pointer;
-  max-width: 250px;
-  font-family: monospace;
-  font-size: larger;
+}
+
+.add-minus-btn:hover {
+  background-color: #27ae60; /* Darker Green */
+}
+
+.edit-players-button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: #e74c3c; /* Red */
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.edit-players-button:hover {
+  background-color: #c0392b; /* Darker Red */
+}
+
+.save-players-button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: #2ecc71; /* Green */
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.save-players-button:hover {
+  background-color: #27ae60; /* Darker Green */
+}
+
+.cancel-players-button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: #e74c3c; /* Red */
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.cancel-players-button:hover {
+  background-color: #c0392b; /* Darker Red */
 }
 
 .separator {
-  border: 0.5px solid #ddd;
-  margin-top: 5px;
-  margin-bottom: 10px;
+  border: none;
+  border-top: 1px solid #95a5a6; /* Gray */
+  margin-top: 10px;
 }
 
-.error-msg {
-  border: 1px solid;
-  margin: 10px 0px;
-  padding: 15px 10px 15px 50px;
-  background-repeat: no-repeat;
-  background-position: 10px center;
-
-  color: #D63301;
-  background-color: #FFCCBA;
-  background-image: url('https://i.imgur.com/GnyDvKN.png');
+.add-players-div{
+  display: ruby-text;
 }

@@ -6,10 +6,11 @@ import './Sidebar.css';
 import { PATH } from '../../constants/path';
 
 interface SidebarProps {
-  isOpen: boolean;
+  isOpen: boolean,
+  onToggleSidebar: () => void
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
+const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggleSidebar}) => {
 
   const playerPath = PATH.BASE_PATH + "/player";
   const createTeamsPath = PATH.BASE_PATH + "/createTeams";
@@ -17,16 +18,16 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
     <nav className={isOpen ? 'open' : ''}>
       <ul>
         <li>
-          <Link to={PATH.BASE_PATH}>Login</Link>
+          <Link to={PATH.BASE_PATH} onClick={onToggleSidebar}>Login</Link>
         </li>
         <li>
-          <Link to={PATH.HOME_PATH}>Home</Link>
+          <Link to={PATH.HOME_PATH} onClick={onToggleSidebar}>Home</Link>
         </li>
         <li>
-          <Link to={PATH.PLAYER_PATH}>Create Teams</Link>
+          <Link to={PATH.PLAYER_PATH} onClick={onToggleSidebar}>Players</Link>
         </li>
         <li>
-          <Link to={PATH.CREATE_TEAMS_PATH}>Create Teams Workflow</Link>
+          <Link to={PATH.CREATE_TEAMS_PATH} onClick={onToggleSidebar}>Create Teams</Link>
         </li>
         {/* Add other sidebar items with Link components */}
       </ul>

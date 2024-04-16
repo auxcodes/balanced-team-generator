@@ -8,20 +8,27 @@ import './App.css'; // Import your main CSS file
 import { PATH } from './constants/path';
 import CreateTeamsWorkflow from './components/Pages/CreateTeamsWorflow/CreateTeamsWorkflow';
 import LoginPage from './components/Pages/LoginPage/LoginPage';
+import { PlayerModel } from './components/Pages/CreateTeamsWorflow/Models/CreateTeamsModels';
+import { PlayerList } from './mocks/PlayerMock';
 
 const App: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true); // Assuming you have a state for login status
+  const [userPlayers, setUserPlayers] = useState<PlayerModel[]>([]);
 
   const handleToggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
+  React.useEffect(() => {
+    setUserPlayers(PlayerList);
+  }, []);
+
   return (
     <Router>
       <div className="App">
         <div className={`${isSidebarOpen ? 'leftDisplay' : 'leftHide'}`}>
-          <Sidebar isOpen={isSidebarOpen} />
+          <Sidebar isOpen={isSidebarOpen} onToggleSidebar={handleToggleSidebar}/>
         </div>
 
         <div className={`right ${isSidebarOpen ? '' : 'hide'}`}>
@@ -39,7 +46,7 @@ const App: React.FC = () => {
               />
               <Route
                 path={PATH.PLAYER_PATH}
-                element={isLoggedIn ? <Players /> : <Navigate to={PATH.LOGIN_PATH} />}
+                element={isLoggedIn ? <Players playersData={userPlayers} setPlayersData={setUserPlayers}/> : <Navigate to={PATH.LOGIN_PATH} />}
               />
               <Route
                 path={PATH.CREATE_TEAMS_PATH}
