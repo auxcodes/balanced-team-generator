@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { UserContext } from '../../../../App';
+import { Link } from 'react-router-dom';
+import { PATH } from '../../../../constants/path';
 
 interface PlayersImportProps {
   playersData: PlayerModel[],
@@ -40,8 +42,8 @@ const PlayersImport: React.FC<PlayersImportProps> = ({ playersData, setPlayersDa
   }
 
   /*TODO: Remove, just populating dummy data for now. */
-  React.useEffect(()=> {
-    if(dataInputType === 'user'){
+  React.useEffect(() => {
+    if (dataInputType === 'user') {
       setPlayersData(userPlayers);
     }
   }, [dataInputType]);
@@ -112,7 +114,7 @@ const PlayersImport: React.FC<PlayersImportProps> = ({ playersData, setPlayersDa
 
   const renderRatingOptions = () => {
     const options = [];
-    for (let rating = 1.0; rating <= 5.0; rating += 0.5) {
+    for (let rating = 1; rating <= 20; rating += 1) {
       options.push(
         <option key={rating} value={rating}>
           {rating.toFixed(1)}
@@ -126,26 +128,27 @@ const PlayersImport: React.FC<PlayersImportProps> = ({ playersData, setPlayersDa
   return (
     <div className='players-import-container'>
       <div className='import-data-content'>
-        <h3>Choose Data Input Type</h3>
+        <h3>Choose Player Input Type</h3>
         <div>
-        <div className="dropdown-container">
-          <select
-            className="dropdown-type-list"
-            value={dataInputType}
-            onChange={(e) => setDataInputType(e.target.value as 'manual' | 'url' | 'user' | 'dynamic insert')}
-          >
-            <option value="manual">Manual Input</option>
-            <option value="url">Google Spreadsheet URL</option>
-            <option value="user">Use My Players</option>
-            <option value="dynamic insert">Dynamic Insert</option>
-          </select>
-        </div>
+          <div className="dropdown-container">
+            <select
+              className="dropdown-type-list"
+              value={dataInputType}
+              onChange={(e) => setDataInputType(e.target.value as 'manual' | 'url' | 'user' | 'dynamic insert')}
+            >
+              <option value="manual">List Input</option>
+              <option value="url">Google Spreadsheet URL</option>
+              <option value="dynamic insert">Manually Add</option>
+              <option value="user">Test Players</option>
+            </select>
+          </div>
 
 
           {dataInputType === 'manual' && (
             <div>
               <h4>Enter Players Information</h4>
               <textarea
+                className="player-textarea"
                 value={manualData}
                 onChange={(e) => setManualData(e.target.value)}
                 placeholder="Player1:Rating1&#10;Player2:Rating2&#10;...."
@@ -157,6 +160,7 @@ const PlayersImport: React.FC<PlayersImportProps> = ({ playersData, setPlayersDa
             <div>
               <h4>Google Spreadsheet CSV URL</h4>
               <input
+                className="url-input"
                 type="text"
                 value={spreadsheetUrl}
                 onChange={(e) => setSpreadsheetUrl(e.target.value)}
@@ -168,34 +172,36 @@ const PlayersImport: React.FC<PlayersImportProps> = ({ playersData, setPlayersDa
           {dataInputType === 'user' && (
             <div>
               <h4>You have {userPlayers.length} players</h4>
-              <p>Go to Players page to update ratings.</p>
+              <p>Go to <Link to={PATH.PLAYERS}>Players Page</Link> to update players and ratings.</p>
             </div>
           )}
 
           {dataInputType === 'dynamic insert' && (
             <div>
-              <h4>Dynamic Player Insertion</h4>
+              <h4>Manually Add Players</h4>
               {dynamicPlayers.map((player, index) => (
-                <div className='dynamic-div' key={index}>
+                <div className='manual-div' key={index}>
                   <input
+                    className='player-input'
                     type="text"
                     placeholder="Player Name"
                     value={player.name}
                     onChange={(e) => handleDynamicPlayerChange(index, 'name', e.target.value)}
                   />
                   <select
+                    className='player-rating'
                     value={player.rating}
                     onChange={(e) => handleDynamicPlayerChange(index, 'rating', e.target.value)}
                   >
                     {renderRatingOptions()}
                   </select>
                   {index === dynamicPlayers.length - 1 && player.name && player.rating && (
-                    <button className='add-minus-btn' onClick={handleAddPlayer} >
+                    <button className='round-btn add-player-btn' onClick={handleAddPlayer} >
                       <FontAwesomeIcon icon={faPlus as IconProp} />
                     </button>
                   )}
                   {index !== dynamicPlayers.length - 1 && (
-                    <button className='add-minus-btn' onClick={() => handleRemovePlayer(index)}>
+                    <button className='round-btn remove-player-btn' onClick={() => handleRemovePlayer(index)}>
                       <FontAwesomeIcon icon={faMinus as IconProp} />
                     </button>
                   )}
@@ -205,12 +211,9 @@ const PlayersImport: React.FC<PlayersImportProps> = ({ playersData, setPlayersDa
           )}
 
 
-          <button className="process-btn" onClick={handleProcessData} disabled={disableProcessButton()}>Process</button>
+          <button className="process-btn" onClick={handleProcessData} disabled={disableProcessButton()}>Import</button>
         </div>
       </div>
-      <p className="player-count">
-        Click Process To Import Players
-      </p>
     </div>
   );
 };

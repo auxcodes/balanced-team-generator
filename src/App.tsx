@@ -1,24 +1,21 @@
 import React, { createContext, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Header from './components/Header/Header';
-import Sidebar from './components/Sidebar/Sidebar';
-import Home from './components/Home';
-import Players from './components/Pages/Players/Players';
 import './App.css'; // Import your main CSS file
 import { PATH } from './constants/path';
 import CreateTeamsWorkflow from './components/Pages/CreateTeamsWorflow/CreateTeamsWorkflow';
-import LoginPage from './components/Pages/LoginPage/LoginPage';
 import { PlayerModel } from './components/Pages/CreateTeamsWorflow/Models/CreateTeamsModels';
 import { PlayerList } from './mocks/PlayerMock';
+import Players from './components/Pages/Players/Players';
 
 
-interface AppUserContext{
+interface AppUserContext {
   userPlayers: PlayerModel[],
   setUserPlayers: React.Dispatch<React.SetStateAction<PlayerModel[]>>
 }
 export const UserContext = createContext<AppUserContext>({
   userPlayers: [],
-  setUserPlayers: () => {}
+  setUserPlayers: () => { }
 });
 
 
@@ -36,39 +33,30 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <UserContext.Provider value={{userPlayers, setUserPlayers}}>
-    <Router>
-      <div className="App">
-        <div className={`${isSidebarOpen ? 'leftDisplay' : 'leftHide'}`}>
-          <Sidebar isOpen={isSidebarOpen} onToggleSidebar={handleToggleSidebar}/>
-        </div>
-
-        <div className={`right ${isSidebarOpen ? '' : 'hide'}`}>
-          <Header isSidebarOpen={isSidebarOpen} onToggleSidebar={handleToggleSidebar} isLoggedIn={isLoggedIn}/>
-          <div className="content">
-            <Routes>
-              <Route
-                path={PATH.BASE_PATH} element={ <Home />}
-              />
-              <Route
-                path={PATH.HOME_PATH} element={ <Home />}
-              />
-              <Route
-                path={PATH.LOGIN_PATH} element={ <LoginPage onLogin={setIsLoggedIn} />}
-              />
-              <Route
-                path={PATH.PLAYER_PATH}
-                element={isLoggedIn ? <Players /> : <Navigate to={PATH.LOGIN_PATH} />}
-              />
-              <Route
-                path={PATH.CREATE_TEAMS_PATH}
-                element={isLoggedIn ? <CreateTeamsWorkflow /> : <Navigate to={PATH.LOGIN_PATH} />}
-              />
-            </Routes>
+    <UserContext.Provider value={{ userPlayers, setUserPlayers }}>
+      <Router>
+        <div className="App">
+          <div className={`right ${isSidebarOpen ? '' : 'hide'}`}>
+            <Header isSidebarOpen={isSidebarOpen} onToggleSidebar={handleToggleSidebar} isLoggedIn={isLoggedIn} />
+            <div className="content">
+              <Routes>
+                <Route
+                  path={PATH.BASE_PATH} element={<CreateTeamsWorkflow />}
+                />
+                <Route
+                  path={PATH.HOME_PATH} element={<CreateTeamsWorkflow />}
+                />
+                <Route
+                  path={PATH.CREATE_TEAMS_PATH} element={<CreateTeamsWorkflow />}
+                />
+                <Route
+                  path={PATH.PLAYERS} element={<Players />}
+                />
+              </Routes>
+            </div>
           </div>
         </div>
-      </div>
-    </Router>
+      </Router>
     </UserContext.Provider>
   );
 };

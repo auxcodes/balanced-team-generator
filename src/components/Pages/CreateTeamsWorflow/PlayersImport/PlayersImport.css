@@ -23,20 +23,6 @@
   .import-data-content {
     display: flow-root;  
   }
-  
-  .process-btn {
-    margin: 10px 10px 0px 0px;
-    margin: 10px 0px;
-    background-color: #bfb79e;
-    color: rgb(60, 6, 6);
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: large;
-    font-family: monospace;
-    font-weight: 700;
-  }
 
   .player-count {
     font-size: 1.2rem;
@@ -48,34 +34,83 @@
   padding: 5px;
   border: 2px solid #01448b; /* Blue border */
   border-radius: 5px;
-  background-color: #cfcee5;
+  background-color: #ffffff;
   font-size: 16px;
   font-family: 'Cosmic Sans', sans-serif; /* Use Cosmic Sans font */
   cursor: pointer;
 }
 
-
-.dynamic-div{
-  margin-top: 5px;
+.player-textarea {
+  min-width: 210px;
+  min-height: 100px;
+  margin-bottom: 16px;
+  border-radius: 5px;
 }
 
-.add-minus-btn {
+.url-input {
+  margin-bottom: 16px;
+  min-width: 210px;
+  min-height: 32px;
+  padding-left: 5px;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.manual-div{
+  margin-top: 5px;
+  margin-bottom: 16px;
+}
+
+.player-input {
+  min-width: 210px;
+  min-height: 32px;
+  padding-left: 5px;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.player-rating {
+  margin-left: 0.5em;
+  min-height: 38px;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.process-btn {
+  margin: 10px 10px 0px 0px;
+  margin: 10px 0px;
+  background-color: #bfb79e;
+  color: rgb(60, 6, 6);
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: large;
+  font-family: monospace;
+  font-weight: 700;
+}
+
+.round-btn {
   margin: 10px 10px 0px 0px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 15px; /* Set width to auto */
-  max-width: 25px; /* Set maximum width */
-  height: 15px;
+  width: 2rem;
+  height: 2rem;
   border-radius: 50% !important;
-  background-color: #5a7ea3 !important;
-  color: #fff;
   margin: 0px 0px 0px 10px !important;
   cursor: pointer;
-  font-size: x-small;
+  font-size: 1rem;
   padding: 0px !important;
+
 }
 
-.add-minus-btn:hover {
-  background-color: #0056b3; /* Hover color */
+.add-player-btn {
+  background-color: #378ce3  !important;
+  color: #fff;
+}
+
+.remove-player-btn {
+  background-color: #f14b4b !important;
+  color: #fff;
 }

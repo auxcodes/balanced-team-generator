@@ -4,6 +4,8 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { UserContext } from '../../../App';
+import { Link } from 'react-router-dom';
+import { PATH } from '../../../constants/path';
 
 interface PlayerModel {
   name: string;
@@ -13,7 +15,7 @@ interface PlayerModel {
 const Players = () => {
   const [editMode, setEditMode] = useState<boolean>(false);
   const [updatedPlayersData, setUpdatedPlayersData] = useState<PlayerModel[]>([]);
-  const {userPlayers, setUserPlayers} = useContext(UserContext);
+  const { userPlayers, setUserPlayers } = useContext(UserContext);
 
   useEffect(() => {
     setUpdatedPlayersData([...userPlayers]);
@@ -45,7 +47,7 @@ const Players = () => {
   }
 
   return (
-    <div>
+    <div className="players-page">
       <h2>Players Page</h2>
 
       <div className="container">
@@ -99,15 +101,15 @@ const Players = () => {
         ))}
 
         <div className='add-players-div'>
-        {editMode && (
-                <button className="add-minus-player-btn" onClick={handleAddPlayer} 
-                disabled={updatedPlayersData[updatedPlayersData.length-1].name?false:true}>
-                  <FontAwesomeIcon icon={faPlus as IconProp} />
-                </button>
-              )}
+          {editMode && (
+            <button className="add-minus-player-btn" onClick={handleAddPlayer}
+              disabled={updatedPlayersData[updatedPlayersData.length - 1].name ? false : true}>
+              <FontAwesomeIcon icon={faPlus as IconProp} />
+            </button>
+          )}
         </div>
 
-        <button className="edit-players-button" onClick={editMode?handleCancel: handleEdit}>
+        <button className="edit-players-button" onClick={editMode ? handleCancel : handleEdit}>
           {editMode ? 'Cancel' : 'Edit'}
         </button>
         {editMode && (
@@ -115,6 +117,7 @@ const Players = () => {
             Save
           </button>
         )}
+        <Link to={PATH.CREATE_TEAMS_PATH}>Create Teams</Link>
       </div>
     </div>
   );

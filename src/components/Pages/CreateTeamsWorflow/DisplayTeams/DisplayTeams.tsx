@@ -36,7 +36,10 @@ const DisplayTeams: React.FC<DisplayTeamsProps> = ({ errorMessage, teams, onBack
 
     return (
         <div className='team-display-container'>
-            <h2>Team Display</h2>
+            <div className="wizard-header">
+                <button className="back-button" onClick={onBack}>Back</button>
+                <h2>Team Display</h2>
+            </div>
 
             {teams && !errorMessage &&
                 <div className="team-container">

@@ -78,7 +78,10 @@ const ConfirmSelection: React.FC<ConfirmSelectionProps> = ({ setErrorMessage, se
 
     return (
         <div className='confirmation-container'>
-            <h2>Review Selection</h2>
+            <div className="wizard-header">
+                <button className="back-button" onClick={onBack}>Back</button>
+                <h2>Review Selection</h2>
+            </div>
             <h3>Players Playing:</h3>
             <ul>
                 {selectedPlayers.map((player, index) => (
@@ -87,7 +90,6 @@ const ConfirmSelection: React.FC<ConfirmSelectionProps> = ({ setErrorMessage, se
             </ul>
             <h2>Number of Teams: {teamCount}</h2>
             <div className='btn-div'>
-                <button onClick={onBack}>Back</button>
                 <button onClick={handleGenerateTeams}>Generate Teams</button>
             </div>
         </div>

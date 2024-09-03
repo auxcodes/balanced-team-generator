@@ -1,3 +1,9 @@
+.players-page {
+  display: flex;
+  max-width: 500px;
+  margin: auto;
+}
+
 .container {
   background-color: #ebe8d6; /* Light Blue */
   padding: 20px;
@@ -7,7 +13,8 @@
 .player-item {
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 0.25em;
+  padding-left: 1em;
   font-family: 'TechFont', sans-serif; /* Tech font for player data */
 }
 

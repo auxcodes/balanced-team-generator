@@ -13,11 +13,6 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ isSidebarOpen, onToggleSidebar, isLoggedIn }) => {
   return (
     <header>
-      {isLoggedIn && 
-        <button className="menu-icon" onClick={onToggleSidebar}>
-          <FontAwesomeIcon icon={(isSidebarOpen ? faArrowLeft : faBars) as IconProp} />
-        </button>
-      }
       <h1 className="title">Balanced Team Generator</h1>
     </header>
   );
