@@ -17,7 +17,7 @@
   width: 70%;
 }
 
-.right .hide{
+.right .hide {
   width: 100%;
 }
 
@@ -30,4 +30,19 @@
 .content {
   overflow: auto;
   padding: 10px;
+}
+
+.back-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.back-button {
+  margin: 10px 10px 0px 0px;
+  background-color: rgb(115, 114, 114);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
 }

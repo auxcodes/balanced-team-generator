@@ -1,33 +1,53 @@
 .confirmation-container {
-    max-width: 500px;
-    margin: 0 auto;
+  max-width: 500px;
+  margin: 0 auto;
+
+  .player-count-label {
+    margin: auto;
+    font-weight: bold;
   }
-  
-  .confirmation-container h2 {
-    text-align: center;
-    color: #008080;
+
+  .generate-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
   }
-  
-  .confirmation-container h3 {
-    color: #555;
+
+  .generate-btn {
+    margin: auto;
+    background-color: rgb(232, 81, 81);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 1rem;
   }
-  
-  .confirmation-container ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .confirmation-container li {
-    margin-bottom: 10px;
-  }
-  
-  .confirmation-container label {
-    display: block;
-    margin-top: 10px;
-    color: #555;
-  }
-  
-  .btn-div {
-    display: flex;
-  }
-  
+}
+
+.confirmation-container h2 {
+  text-align: center;
+  color: #008080;
+}
+
+.confirmation-container h3 {
+  color: #555;
+}
+
+.confirmation-container ul {
+  list-style: none;
+  padding: 0;
+}
+
+.confirmation-container li {
+  margin-bottom: 10px;
+}
+
+.confirmation-container label {
+  display: block;
+  margin-top: 10px;
+  color: #555;
+}
+
+.btn-div {
+  display: flex;
+}
